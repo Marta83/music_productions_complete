@@ -39,6 +39,26 @@ class AlbumController extends Controller
      */
     public function listAction(Request $request)
     {
-        return new Response();
+        $albums = $this->getDoctrine()
+            ->getRepository(Album::class)
+            ->findAll();
+
+        return $this->render('album/index.html.twig', [
+            'albums' => $albums,
+        ]);
+
+    }
+
+    /**
+     * @Route("/delete-album/{id}", name="delete_album")
+     */
+    public function deleteAction(Album $album)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($album);
+        $em->flush();
+
+        return $this->redirectToRoute('album_list');
     }
 }
