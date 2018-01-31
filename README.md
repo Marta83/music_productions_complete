@@ -20,7 +20,7 @@ sudo apt install php7.1-sqlite3
 
 ### Installing
 
-1. Unzip folder
+1. Download project
 
 2. From application root execute composer install and enter parameter.yml data when the installer required them. (Database host and name for dev and test enviroments).
 
