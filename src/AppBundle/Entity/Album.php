@@ -38,7 +38,7 @@ class Album
      *
      * @ORM\Column(name="published_at", type="datetime")
      */
-    private $publishedAt;
+    private $published_at;
 
     /**
      * @ORM\ManyToMany(targetEntity="Artist", mappedBy="albums")
@@ -82,25 +82,25 @@ class Album
     /**
      * Set publishedAt
      *
-     * @param \DateTime $publishedAt
+     * @param \DateTime $published_at
      *
      * @return Album
      */
-    public function setPublishedAt($publishedAt)
+    public function setPublishedAt($published_at)
     {
-        $this->publishedAt = $publishedAt;
+        $this->published_at = $published_at;
 
         return $this;
     }
 
     /**
-     * Get publishedAt
+     * Get published_at
      *
      * @return \DateTime
      */
     public function getPublishedAt()
     {
-        return $this->publishedAt;
+        return $this->published_at;
     }
 }
 
