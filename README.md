@@ -27,6 +27,7 @@ sudo apt install php7.1-sqlite3
 3. Execute this commands in order to create database for dev and test enviroment:
 
 ```
+php bin/console doctrine:database:create
 php bin/console doctrine:schema:update --force
 php bin/console doctrine:database:create --env=test
 php bin/console doctrine:schema:update --force --env=test
