@@ -41,16 +41,16 @@ php bin/console doctrine:schema:update --force --env=test
 php bin/console server:run
 ```
 
-5. Test this route to see the list of Albums (you can also delete album form delete link):
-
-```
-http://127.0.0.1:8000/
-```
-
-6. Test this route to see add an Album:
+5. Test this route to see add an Album:
 
 ```
 http://127.0.0.1:8000/add-album
+```
+
+6. Test this route to see the list of Albums (you can also delete album form delete link):
+
+```
+http://127.0.0.1:8000/
 ```
 
 
