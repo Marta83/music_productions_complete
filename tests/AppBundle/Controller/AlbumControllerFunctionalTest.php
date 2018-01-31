@@ -59,8 +59,6 @@ class AlbumControllerFunctionalTest extends WebTestCase
     {
         $crawler = $this->client->request('GET',"/");
 
-        $this->assertEquals(1,$crawler->filter('html:contains("Album title")')->count());
-
         $link = $crawler
             ->filter('a:contains("Delete")')
             ->eq(1)
