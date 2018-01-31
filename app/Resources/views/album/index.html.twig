@@ -1,5 +1,5 @@
 <ul>
   {% for album in albums %}
-  <li><a id="album-{{album.id}}" href={{ path('delete_album', {'id' : album.id}) }}>Delete</a> On the {{album.getPublishedAt|date("F jS")}} we published "{{album.title}}" with the participation of:</li>
+  <li><a id="album-{{album.id}}" href={{ path('delete_album', {'id' : album.id}) }}>Delete</a> On the {{album.getPublishedAt|date("F jS")}} we published "{{album.title}}"</li>
   {% endfor %}
 </ul>
