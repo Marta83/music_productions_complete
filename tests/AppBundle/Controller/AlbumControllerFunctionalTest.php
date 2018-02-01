@@ -16,6 +16,20 @@ class AlbumControllerFunctionalTest extends WebTestCase
     protected function setUp()
     {
         $this->client = static::createClient();
+
+        $this->populateData();
+    }
+
+    private function populateData()
+    {
+        $loader = new Loader();
+        $purger = new ORMPurger();
+        $em= $this->client->getContainer()->get('doctrine.orm.entity_manager');;
+
+        $loader->loadFromFile('src/AppBundle/DataFixtures/AlbumFixtures.php');
+
+        $executor = new ORMExecutor($em, $purger);
+        $executor->execute($loader->getFixtures());
     }
 
     /**
@@ -41,18 +55,21 @@ class AlbumControllerFunctionalTest extends WebTestCase
         $crawler = $this->client->request('GET',"/add-album");
 
         $form = $crawler->selectButton('Create')->form();
-        $form['album[title]'] = 'Album title';
+        $form['album[title]'] = 'Album title new';
 
         $crawler = $this->client->submit($form);
 
         $this->assertTrue($this->client->getResponse()->isRedirect('/'));
+
+        $this->client->followRedirect();
+        $this->assertContains('Album title new', $this->client->getResponse()->getContent());
     }
 
     public function testlistsAlbums()
     {
         $crawler = $this->client->request('GET',"/");
 
-        $this->assertEquals(1,$crawler->filter('html:contains("Album title")')->count());
+        $this->assertEquals(20,$crawler->filter('.album')->count());
     }
 
     public function testDeleteAlbum()
