@@ -83,6 +83,26 @@ class Artist
     }
 
     /**
+     * Get albums
+     *
+     * @return string
+     */
+    public function getAlbums()
+    {
+        return $this->albums;
+    }
+
+    /**
+     * Add album
+     *
+     * @param album $album
+     */
+    public function addAlbum(Album $album)
+    {
+        $this->albums[] = $album;
+    }
+
+    /**
      * Set speciality
      *
      * @param string $speciality

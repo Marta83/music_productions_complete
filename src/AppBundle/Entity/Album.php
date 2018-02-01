@@ -56,6 +56,16 @@ class Album
     }
 
     /**
+     * Get artist
+     *
+     * @return int
+     */
+    public function getArtists()
+    {
+        return $this->artists;
+    }
+
+    /**
      * Set title
      *
      * @param string $title

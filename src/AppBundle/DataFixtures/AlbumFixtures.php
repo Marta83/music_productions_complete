@@ -13,7 +13,7 @@ class AlbumFixtures implements FixtureInterface
     {
             for ($i = 0; $i < 20; $i++) {
                 $album = new Album();
-                $album->setTitle('Album title');
+                $album->setTitle('Album title ' . $i);
                 $album->setPublishedAt(new \DateTime());
                 $manager->persist($album);
             }

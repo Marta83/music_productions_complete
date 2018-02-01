@@ -7,11 +7,15 @@ use Doctrine\Common\DataFixtures\Loader;
 use AppBundle\DataFixtures\AlbumFixtures;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
+use AppBundle\Entity\Album;
+use AppBundle\Entity\Artist;
 
 class AlbumControllerFunctionalTest extends WebTestCase
 {
 
     private $client;
+    private $albums;
+    private $artist;
 
     protected function setUp()
     {
@@ -30,6 +34,9 @@ class AlbumControllerFunctionalTest extends WebTestCase
 
         $executor = new ORMExecutor($em, $purger);
         $executor->execute($loader->getFixtures());
+
+        $this->albums = $em->getRepository(Album::class)->findAll();
+        $this->artist = $em->getRepository(Artist::class)->findAll();
     }
 
     /**
@@ -68,8 +75,11 @@ class AlbumControllerFunctionalTest extends WebTestCase
     public function testlistsAlbums()
     {
         $crawler = $this->client->request('GET',"/");
+        $content = $this->client->getResponse()->getContent();
 
-        $this->assertEquals(20,$crawler->filter('.album')->count());
+        foreach($this->albums as $album){
+          $this->assertContains($album->getTitle(), $content);
+        }
     }
 
     public function testDeleteAlbum()
