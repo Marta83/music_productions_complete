@@ -48,7 +48,7 @@ php bin/console server:run
 ```
 http://127.0.0.1:8000/
 ```
-In this page you can manage the productions of the company. This is the list of actions you can do and How
+In this page you can manage the productions of the company. This is the list of actions you can do and how
 
 - Add a new Album: Click the link "Add album" and you will be redirected to add album form.
 
@@ -56,7 +56,7 @@ In this page you can manage the productions of the company. This is the list of 
 
 - Assign artist to existed album : In the corresponding album line click the link "Add artist" and you will redirect to a form where you can  create new artist.
 
-- Delete artist: Each album has it's own artist list. Each artist has a delete link. If delete link is clicked the association between album and artist is going to be remove and if the artist doesn't have mor associations the artist also will be remove.
+- Delete artist: Each album has it's own artist list. Each artist has a delete link. If delete link is clicked the association between album and artist is going to be remove and if the artist doesn't have more associations the artist also will be remove.
 
 
 ## Running the tests
