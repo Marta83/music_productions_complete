@@ -1,8 +1,28 @@
-<h3> Create a new artist and assign to album "{{album.getTitle}}":</h3>
-{{ form_start(form) }}
-{{ form_widget(form) }}
+{% extends 'base.html.twig' %}
 
-<input type="submit" class="btn" value="Create and assign" />
-{{ form_end(form) }}
+{% block title %}Add new artist{% endblock %}
 
-<a href= {{path("album_list")}} >Cancel</a>
+{% block body %}
+<div class="row">
+  <div class="col-4 offset-4">
+     <div class="card text-center">
+        <div class="card-header">
+           Add artist
+        </div>
+        <div class="card-body">
+            <p class="card-text">
+             Create artist and assign to album "{{album.getTitle}}":
+            </p>
+
+            {{ form_start(form) }}
+              {{ form_widget(form) }}
+
+              <input type="submit" class="btn btn-primary btn-block" value="Create and Assign" />
+              <a class="text-secondary" href={{ path('album_list')}}>or cancel</a>
+            {{ form_end(form) }}
+
+        </div>
+     </div>
+   </div>
+</div>
+{% endblock %}

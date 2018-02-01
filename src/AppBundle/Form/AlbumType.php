@@ -8,7 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class AlbumType extends AbstractType
 {
@@ -16,8 +16,9 @@ class AlbumType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('published_at', DateTimeType::class)
-        ;
+            ->add('published_at', DateType::class,
+                array('format' => 'yyyy-MM-dd')
+         );
     }
 
     public function configureOptions(OptionsResolver $resolver)

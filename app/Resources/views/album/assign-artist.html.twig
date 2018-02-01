@@ -1,10 +1,38 @@
-<h3> Select artist from existed to album "{{album.getTitle}}":</h3>
-{{ form_start(form) }}
-{{ form_widget(form) }}
 
-<input type="submit" class="btn" value="Assign" />
-{{ form_end(form) }}
+{% extends 'base.html.twig' %}
 
-<a id="add-artist-{{album.id}}" class="add-artist"  href={{ path('add_artist', {'albumid' : album.id}) }}>or add a new artist</a>
+{% block title %}Assign artist{% endblock %}
 
-<a href={{ path('album_list')}}>cancel</a>
+{% block body %}
+
+<div class="row">
+  <div class="col-4 offset-4">
+     <div class="card text-center">
+        <div class="card-header">
+           Assign artist
+        </div>
+        <div class="card-body">
+            <p class="card-text">
+             Select artist to album "{{album.getTitle}}":
+            </p>
+
+            {{ form_start(form) }}
+              {{ form_widget(form) }}
+
+              <input type="submit" class="btn btn-primary btn-block" value="Assign" />
+              <a class="text-secondary" href={{ path('album_list')}}>or cancel</a>
+            {{ form_end(form) }}
+
+        </div>
+        <ul class="list-group list-group-flush">
+             <li class="list-group-item">
+                I can't find the artist. <a id="add-artist-{{album.id}}" class="add-artist"  href={{ path('add_artist', {'albumid' : album.id}) }}>Add a new artist</a>
+             </li>
+        </ul>
+     </div>
+   </div>
+</div>
+
+
+
+{% endblock %}

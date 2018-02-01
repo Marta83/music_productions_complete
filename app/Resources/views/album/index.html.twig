@@ -1,20 +1,41 @@
+{% extends 'base.html.twig' %}
 
-<a id="add-album" href={{ path('add_album')}}>Add Album</a>
-<ul>
+
+{% block title %}List of albums{% endblock %}
+
+{% block body %}
+<h3>List of albums</h3>
+<a id="add-album" class="btn btn-outline-primary" href={{ path('add_album')}}>Add Album</a>
+<hr>
+
+<div class="row">
   {% for album in albums %}
-    <li>
-      <a id="delete-album-{{album.id}}" class="album" href={{ path('delete_album', {'id' : album.id}) }}>Delete</a>
-      <a id="assign-artist-{{album.id}}" class="assign-artist" href={{ path('assign_artist', {'albumid' : album.id}) }}>Assign artist</a>
-      On the {{album.getPublishedAt|date("F jS")}} we published "{{album.title}}", with contributions by:
+    <div class="col-3">
+      <div class="card">
+          <div class="card-header">
+            {{album.title}}
+          </div>
 
-      <ol>
-        {% for artist in album.getArtists %}
-          <li>
-            <a id="delete-artist-{{album.id}}-{{artist.id}}" class="artist" href={{ path('delete_artist', {'id' : artist.id, 'albumid' : album.id}) }}>Delete</a>
-            {{artist.getName}}, {{artist.getSpeciality}}
-          </li>
-        {% endfor %}
-      </ol>
-    </li>
+          <div class="card-body">
+            <p class="card-text">
+              On the {{album.getPublishedAt|date("F jS")}} we published "{{album.title}}" with contributions by:
+            </p>
+
+            <ol class="">
+              {% for artist in album.getArtists %}
+                <li>
+                  {{artist.getName}}, {{artist.getSpeciality}}
+                  <a id="delete-artist-{{album.id}}-{{artist.id}}" style="color:#dc3545"  class="btn-sm" href={{ path('delete_artist', {'id' : artist.id, 'albumid' : album.id}) }}>Delete</a>
+                </li>
+              {% endfor %}
+            </ol>
+
+            <a id="delete-album-{{album.id}}" class="btn btn-outline-danger btn-sm" href={{ path('delete_album', {'id' : album.id}) }}>Delete</a>
+            <a id="assign-artist-{{album.id}}" class="btn btn-outline-primary btn-sm assign-artist" href={{ path('assign_artist', {'albumid' : album.id}) }}>Assign artist</a>
+          </div>
+      </div>
+    </div>
   {% endfor %}
-</ul>
+</div>
+
+{% endblock %}

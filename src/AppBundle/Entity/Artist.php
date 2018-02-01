@@ -82,6 +82,11 @@ class Artist
         return $this->name;
     }
 
+    public function getTitle()
+    {
+        return $this->name . ', ' . $this->speciality;
+    }
+
     /**
      * Get albums
      *

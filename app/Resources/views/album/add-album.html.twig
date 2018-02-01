@@ -1,5 +1,26 @@
-{{ form_start(form) }}
-{{ form_widget(form) }}
 
-<input type="submit" class="btn" value="Create" />
-{{ form_end(form) }}
+{% extends 'base.html.twig' %}
+
+{% block title %}Add new album{% endblock %}
+
+{% block body %}
+
+<div class="row">
+  <div class="col-4 offset-4">
+     <div class="card text-center">
+        <div class="card-header">
+          Add album
+        </div>
+        <div class="card-body">
+            {{ form_start(form) }}
+              {{ form_widget(form) }}
+
+              <input type="submit" class="btn btn-primary btn-block" value="Create" />
+              <a class="text-secondary" href={{ path('album_list')}}>or cancel</a>
+            {{ form_end(form) }}
+
+        </div>
+     </div>
+   </div>
+</div>
+{% endblock %}

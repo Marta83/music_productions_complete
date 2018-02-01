@@ -18,7 +18,8 @@ class ExistedArtistType extends AbstractType
     {
         $builder->add('artists', EntityType::class, array(
                  'class' => Artist::class,
-                 'choice_label' => 'name')
+                 'choice_label' => 'title',
+                 'label' => false)
              );
     }
 

@@ -84,7 +84,7 @@ class AlbumControllerFunctionalTest extends DataFixturesTestCase
         $this->assertTrue($node->count() == 1);
 
         //Select artist
-        $value = $crawler->filter("option:contains('{$artist->getName()}')")->attr('value');
+        $value = $crawler->filter("option:contains('{$artist->getTitle()}')")->attr('value');
         $form = $crawler->selectButton('Assign')->form();
         $form['existed_artist[artists]']->select($value);
 
