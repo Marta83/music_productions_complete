@@ -24,8 +24,9 @@
             <ol class="">
               {% for contribution in album.getContributions %}
                 <li>
-                  {{contribution.getArtist.getTitle}}
-                  <a id="delete-artist-{{contribution.id}}" style="color:#dc3545"  class="btn-sm" href={{ path('delete_artist', {'contributionid' : contribution.id}) }}>Delete</a>
+                {{contribution.getArtist.getTitle}}
+                <span class="badge badge-light">Fee: ${{contribution.getFee()|number_format(2, '.', ',') }}</span>
+                <a id="delete-artist-{{contribution.id}}" style="color:#dc3545"  class="btn-sm" href={{ path('delete_artist', {'contributionid' : contribution.id}) }}>Delete</a><hr>
                 </li>
               {% endfor %}
             </ol>

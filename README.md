@@ -8,14 +8,11 @@ These instructions will get you a copy of the Symfony 3 project up and running o
 
 ### Prerequisites
 
-For the correct execution of the application PHP 7.1 is needed and php7.1-sqlite3
+For the correct execution of the application PHP 7.1 is needed.
 
 
 ```
 sudo apt-get install php7.0 php7.0-fpm php7.0-mysql -y
-```
-```
-sudo apt install php7.1-sqlite3
 ```
 
 ### Installing
