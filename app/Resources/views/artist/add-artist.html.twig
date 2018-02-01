@@ -1,5 +1,8 @@
+<h3> Create a new artist and assign to album "{{album.getTitle}}":</h3>
 {{ form_start(form) }}
 {{ form_widget(form) }}
 
-<input type="submit" class="btn" value="Create" />
+<input type="submit" class="btn" value="Create and assign" />
 {{ form_end(form) }}
+
+<a href= {{path("album_list")}} >Cancel</a>

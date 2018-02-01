@@ -1,0 +1,10 @@
+<h3> Select artist from existed to album "{{album.getTitle}}":</h3>
+{{ form_start(form) }}
+{{ form_widget(form) }}
+
+<input type="submit" class="btn" value="Assign" />
+{{ form_end(form) }}
+
+<a id="add-artist-{{album.id}}" class="add-artist"  href={{ path('add_artist', {'albumid' : album.id}) }}>or add a new artist</a>
+
+<a href={{ path('album_list')}}>cancel</a>

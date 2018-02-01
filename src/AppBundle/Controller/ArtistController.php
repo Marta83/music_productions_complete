@@ -13,6 +13,7 @@ use AppBundle\Entity\Album;
 
 class ArtistController extends Controller
 {
+
     /**
      * @Route("/add-artist/{albumid}", name="add_artist")
      * @ParamConverter("album", options={"mapping"={"albumid"="id"}})
@@ -35,6 +36,7 @@ class ArtistController extends Controller
 
         return $this->render('artist/add-artist.html.twig', [
             'form' => $form->createView(),
+            'album' => $album
             ]);
     }
 

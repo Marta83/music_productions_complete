@@ -15,9 +15,9 @@ class DataFixturesTestCase extends WebTestCase
 {
     protected $client;
     protected $container;
-    protected $entityManager;
     protected $albums;
     protected $artists;
+    protected $em;
 
     protected function setUp()
     {
