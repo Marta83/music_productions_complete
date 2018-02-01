@@ -57,7 +57,7 @@ In this page you can manage the productions of the company. This is the list of 
 
 - Delete album : In the corresponding album line click the link "Delete" and album will be deleted.
 
-- Assign artist to existed album : In the corresponding album line click the link "Assign artist" and you will redirect to a form where yo can select existed artist to the album. Also you can create new artist if you click "or add new artist" link.
+- Assign artist to existed album : In the corresponding album line click the link "Add artist" and you will redirect to a form where you can  create new artist.
 
 - Delete artist: Each album has it's own artist list. Each artist has a delete link. If delete link is clicked the association between album and artist is going to be remove and if the artist doesn't have mor associations the artist also will be remove.
 

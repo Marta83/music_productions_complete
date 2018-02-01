@@ -67,36 +67,6 @@ class AlbumControllerFunctionalTest extends DataFixturesTestCase
         }
     }
 
-    public function testAssingArtistToAlbum()
-    {
-        $crawler = $this->client->request('GET',"/");
-        $artist = array_pop($this->artists);
-        $num_albums = count($artist->getAlbums());
-
-        //get assing Link
-        $link = $crawler->filter(".assign-artist")
-                        ->eq(0)->link();
-
-        $crawler = $this->client->click($link);
-
-        //assert add-artist link is pressent
-        $node = $crawler->filterXPath('//a[@class="add-artist"]');
-        $this->assertTrue($node->count() == 1);
-
-        //Select artist
-        $value = $crawler->filter("option:contains('{$artist->getTitle()}')")->attr('value');
-        $form = $crawler->selectButton('Assign')->form();
-        $form['existed_artist[artists]']->select($value);
-
-        $crawler = $this->client->submit($form);
-        $this->client->followRedirect();
-        $artist = $this->em->getRepository(Artist::class)->find($artist->getId());
-
-        //assert assign existed artist
-        $this->assertEquals($num_albums +1, count($artist->getAlbums()));
-    }
-
-
     public function testDeleteAlbum()
     {
         $crawler = $this->client->request('GET',"/");

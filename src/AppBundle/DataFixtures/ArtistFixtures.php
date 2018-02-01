@@ -5,6 +5,7 @@ namespace AppBundle\DataFixtures;
 use App\Entity\Product;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use AppBundle\Entity\Contribution;
 use AppBundle\Entity\Artist;
 
 class ArtistFixtures extends AbstractFixture
@@ -25,8 +26,13 @@ class ArtistFixtures extends AbstractFixture
             $artist = new Artist();
             $artist->setName('Artist name ' . $number);
             $artist->setSpeciality('Artist speciality ' .$number);
-            $artist->addAlbum($album);
             $manager->persist($artist);
+
+            $contribution = new Contribution();
+            $contribution->setAlbum($album);
+            $contribution->setArtist($artist);
+            $contribution->setFee(rand(1,5000));
+            $manager->persist($contribution);
 
         }
 

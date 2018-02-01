@@ -14,33 +14,53 @@ class ArtistControllerFunctionalTest extends DataFixturesTestCase
         parent::populateData();
     }
 
-    public function testAddAlbum()
+    public function testAddArtistError()
     {
         $crawler = $this->client->request('GET',"/");
         $album = array_shift($this->albums);
-        $num_artist = count($album->getArtists());
+        $num_artist = count($album->getContributions());
 
         //get assing Link
-        $link = $crawler->filter(".assign-artist")
-                        ->eq(0)->link();
-        $crawler = $this->client->click($link);
-
-        //get add Link
         $link = $crawler->filter(".add-artist")
-                        ->link();
+                        ->eq(0)->link();
         $crawler = $this->client->click($link);
 
         //get form and submit
         $form = $crawler->selectButton('Create')->form();
         $form['artist[name]'] = 'Artist name new';
         $form['artist[speciality]'] = 'Artist specialty';
+        $form['artist[fee]'] = "not a number";
+
+        $crawler = $this->client->submit($form);
+
+        //assert error fee
+        $this->assertFalse($this->client->getResponse()->isRedirect());
+        $this->assertContains('This value is not valid', $this->client->getResponse()->getContent());
+    }
+
+    public function testAddArtist()
+    {
+        $crawler = $this->client->request('GET',"/");
+        $album = array_shift($this->albums);
+        $num_artist = count($album->getContributions());
+
+        //get assing Link
+        $link = $crawler->filter(".add-artist")
+                        ->eq(0)->link();
+        $crawler = $this->client->click($link);
+
+        //get form and submit
+        $form = $crawler->selectButton('Create')->form();
+        $form['artist[name]'] = 'Artist name new';
+        $form['artist[speciality]'] = 'Artist specialty';
+        $form['artist[fee]'] = rand(1,3000);
 
         $crawler = $this->client->submit($form);
         $this->client->followRedirect();
         $album = $this->em->getRepository(Album::class)->find($album->getId());
 
         //assert assign new artist
-        $this->assertEquals($num_artist +1, count($album->getArtists()));
+        $this->assertEquals($num_artist +1, count($album->getContributions()));
         $this->assertContains('Artist name new', $this->client->getResponse()->getContent());
     }
 
@@ -48,11 +68,12 @@ class ArtistControllerFunctionalTest extends DataFixturesTestCase
     {
         $crawler = $this->client->request('GET',"/");
         $album = $this->albums[0];
-        $artist = $this->albums[0]->getArtists()[0];
+        $contribution = $this->albums[0]->getContributions()->first();
+        $artist = $contribution->getArtist();
 
         //get delete link and clic
         $link = $crawler
-            ->filter("#delete-artist-{$album->getId()}-{$artist->getId()}")
+            ->filter("#delete-artist-{$contribution->getId()}")
             ->link()
             ;
         $crawler = $this->client->click($link);

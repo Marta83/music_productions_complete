@@ -52,31 +52,6 @@ class AlbumController extends Controller
     }
 
     /**
-     * @Route("/assign-artist/{albumid}", name="assign_artist")
-     * @ParamConverter("album", options={"mapping"={"albumid"="id"}})
-     */
-    public function assignArtistAction(Request $request, Album $album)
-    {
-        $form = $this->createForm(ExistedArtistType::class);
-
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-
-            $artist = $form->get('artists')->getData();
-            $artist->addAlbum($album);
-            $em->flush();
-
-            return $this->redirectToRoute('album_list');
-        }
-
-        return $this->render('album/assign-artist.html.twig', [
-            'form' => $form->createView(),
-            'album' => $album
-            ]);
-    }
-
-    /**
      * @Route("/delete-album/{id}", name="delete_album")
      */
     public function deleteAction(Album $album)

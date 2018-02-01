@@ -14,7 +14,7 @@ class Album
 {
 
     public function __construct() {
-        $this->artists = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->Contributions = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -41,9 +41,11 @@ class Album
     private $published_at;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Artist", mappedBy="albums")
+     * @ORM\OneToMany(targetEntity="Contribution", mappedBy="album", cascade={"remove"})
+     * @ORM\JoinTable(name="contribution")
      */
-    private $artists;
+    private $contributions;
+
 
     /**
      * Get id
@@ -53,17 +55,6 @@ class Album
     public function getId()
     {
         return $this->id;
-    }
-
-
-    /**
-     * Get artist
-     *
-     * @return int
-     */
-    public function getArtists()
-    {
-        return $this->artists;
     }
 
     /**
@@ -79,6 +70,26 @@ class Album
 
         return $this;
     }
+
+    /**
+     * Get Contributions
+     *
+     * @return contributions
+     */
+    public function getContributions()
+    {
+        return $this->contributions;
+    }
+
+    /**
+     * Add Contribution
+     *
+     */
+    public function addContribution(Contribution $contribution)
+    {
+        $this->contributions[] = $contribution;
+    }
+
 
     /**
      * Get title

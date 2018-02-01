@@ -14,7 +14,7 @@ class Artist
 {
 
     public function __construct() {
-        $this->albums = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->contributions = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 
@@ -43,10 +43,10 @@ class Artist
     private $speciality;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Album", inversedBy="artists")
-     * @ORM\JoinTable(name="artists_albums")
+     * @ORM\OneToMany(targetEntity="Contribution", mappedBy="artist")
+     * @ORM\JoinTable(name="contribution")
      */
-    private $albums;
+    private $contributions;
 
     /**
      * Get id
@@ -73,6 +73,25 @@ class Artist
     }
 
     /**
+     * Add contribution
+     *
+     */
+    public function addContribution(Contribution $contribution)
+    {
+        $this->contributions[] = $contribution;
+    }
+
+    /**
+     * Get contributions
+     *
+     * @return arrayCollection
+     */
+    public function getContributions()
+    {
+        return $this->contributions;
+    }
+
+    /**
      * Get name
      *
      * @return string
@@ -87,30 +106,6 @@ class Artist
         return $this->name . ', ' . $this->speciality;
     }
 
-    /**
-     * Get albums
-     *
-     * @return string
-     */
-    public function getAlbums()
-    {
-        return $this->albums;
-    }
-
-    public function removeAlbum(Album $album)
-    {
-         return $this->albums->removeElement($album);
-    }
-
-    /**
-     * Add album
-     *
-     * @param album $album
-     */
-    public function addAlbum(Album $album)
-    {
-        $this->albums[] = $album;
-    }
 
     /**
      * Set speciality

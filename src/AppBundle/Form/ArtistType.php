@@ -8,9 +8,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use AppBundle\Entity\Artist;
-use AppBundle\Entity\Album;
 
 class ArtistType extends AbstractType
 {
@@ -18,7 +17,8 @@ class ArtistType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('speciality');
+            ->add('speciality')
+            ->add('fee', NumberType::class ,array("mapped" => false));
     }
 
     public function configureOptions(OptionsResolver $resolver)
