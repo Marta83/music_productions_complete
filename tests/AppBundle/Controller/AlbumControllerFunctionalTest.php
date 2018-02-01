@@ -51,6 +51,11 @@ class AlbumControllerFunctionalTest extends DataFixturesTestCase
         $crawler = $this->client->request('GET',"/");
         $content = $this->client->getResponse()->getContent();
 
+        //asser add-album link is pressent
+        $node = $crawler->filterXPath('//a[@id="add-album"]');
+        $this->assertTrue($node->count() == 1);
+
+        //assert list of albums an artists
         foreach($this->albums as $album){
           $this->assertContains($album->getTitle(), $content);
         }

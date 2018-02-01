@@ -53,11 +53,7 @@ http://127.0.0.1:8000/
 ```
 In this page you can manage the productions of the company. This is the list of actions you can do and How
 
-- Add a new Album
-
-```
-http://127.0.0.1:8000/add-album
-```
+- Add a new Album: Click the link "Add album" and you will be redirected to add album form.
 
 - Delete album : In the corresponding album line click the link "Delete" and album will be deleted.
 
