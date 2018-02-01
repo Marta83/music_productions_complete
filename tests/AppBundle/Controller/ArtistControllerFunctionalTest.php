@@ -3,9 +3,6 @@
 namespace Tests\AppBundle\Controller;
 
 use Tests\DataFixturesTestCase;
-use AppBundle\DataFixtures\AlbumFixtures;
-use AppBundle\Entity\Album;
-use AppBundle\Entity\Artist;
 
 class ArtistControllerFunctionalTest extends DataFixturesTestCase
 {

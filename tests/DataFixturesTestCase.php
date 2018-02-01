@@ -17,7 +17,7 @@ class DataFixturesTestCase extends WebTestCase
     protected $container;
     protected $entityManager;
     protected $albums;
-    protected $artist;
+    protected $artists;
 
     protected function setUp()
     {
@@ -34,12 +34,13 @@ class DataFixturesTestCase extends WebTestCase
         $purger = new ORMPurger();
 
         $loader->loadFromFile('src/AppBundle/DataFixtures/AlbumFixtures.php');
+        $loader->loadFromFile('src/AppBundle/DataFixtures/ArtistFixtures.php');
 
         $executor = new ORMExecutor($this->em, $purger);
         $executor->execute($loader->getFixtures());
 
         $this->albums = $this->em->getRepository(Album::class)->findAll();
-        $this->artist = $this->em->getRepository(Artist::class)->findAll();
+        $this->artists = $this->em->getRepository(Artist::class)->findAll();
 
     }
 

@@ -34,24 +34,24 @@ php bin/console doctrine:schema:update --force --env=test
 
 ```
 
+4. Load initial data from fixtures:
 
-4. From application root, run server:
+```
+php bin/console doctrine:fixtures:load
+```
+
+5. From application root, run server:
 
 ```
 php bin/console server:run
 ```
 
-5. Test this route to see add an Album:
-
-```
-http://127.0.0.1:8000/add-album
-```
-
-6. Test this route to see the list of Albums (you can also delete album form delete link):
+6. Test this route to see the list of Albums:
 
 ```
 http://127.0.0.1:8000/
 ```
+
 
 
 ## Running the tests

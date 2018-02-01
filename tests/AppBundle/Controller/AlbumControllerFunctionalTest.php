@@ -54,6 +54,10 @@ class AlbumControllerFunctionalTest extends DataFixturesTestCase
         foreach($this->albums as $album){
           $this->assertContains($album->getTitle(), $content);
         }
+
+        foreach($this->artists as $artist){
+          $this->assertContains($artist->getName(), $content);
+        }
     }
 
     public function testDeleteAlbum()
