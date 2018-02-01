@@ -2,42 +2,18 @@
 
 namespace Tests\AppBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Doctrine\Common\DataFixtures\Loader;
-use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
-use Doctrine\Common\DataFixtures\Purger\ORMPurger;
+use Tests\DataFixturesTestCase;
 use AppBundle\DataFixtures\AlbumFixtures;
 use AppBundle\Entity\Album;
 use AppBundle\Entity\Artist;
 
-class ArtistControllerFunctionalTest extends WebTestCase
+class ArtistControllerFunctionalTest extends DataFixturesTestCase
 {
-
-    private $client;
-    private $albums;
-    private $artist;
 
     protected function setUp()
     {
-        $this->client = static::createClient();
-
-        $this->populateData();
-    }
-
-    private function populateData()
-    {
-        $loader = new Loader();
-        $purger = new ORMPurger();
-        $em= $this->client->getContainer()->get('doctrine.orm.entity_manager');;
-
-        $loader->loadFromFile('src/AppBundle/DataFixtures/AlbumFixtures.php');
-
-        $executor = new ORMExecutor($em, $purger);
-        $executor->execute($loader->getFixtures());
-
-        $this->albums = $em->getRepository(Album::class)->findAll();
-        $this->artist = $em->getRepository(Artist::class)->findAll();
-
+        parent::setUp();
+        parent::populateData();
     }
 
     public function testAddAlbum()
