@@ -92,6 +92,11 @@ class Artist
         return $this->albums;
     }
 
+    public function removeAlbum(Album $album)
+    {
+         return $this->albums->removeElement($album);
+    }
+
     /**
      * Add album
      *

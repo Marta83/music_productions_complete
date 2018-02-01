@@ -38,4 +38,24 @@ class ArtistController extends Controller
             ]);
     }
 
+    /**
+     * @Route("/delete-artists/{id}/{albumid}", name="delete_artist")
+     * @ParamConverter("album", options={"mapping"={"albumid"="id"}})
+     */
+    public function deleteAction(Artist $artist, Album $album)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $artist->removeAlbum($album);
+        $em->persist($artist);
+
+        if(count($artist->getAlbums()) == 0)
+        {
+            $em->remove($artist);
+         }
+
+        $em->flush();
+
+        return $this->redirectToRoute('album_list');
+    }
 }

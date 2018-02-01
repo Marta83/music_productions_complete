@@ -29,6 +29,23 @@ class ArtistControllerFunctionalTest extends DataFixturesTestCase
         $this->assertContains('Artist name new', $this->client->getResponse()->getContent());
     }
 
+    public function testDeleteArtist()
+    {
+        $crawler = $this->client->request('GET',"/");
+        $album = $this->albums[0];
+        $artist = $this->albums[0]->getArtists()[0];
+
+        $link = $crawler
+            ->filter("#delete-artist-{$album->getId()}-{$artist->getId()}")
+            ->link()
+            ;
+
+        $crawler = $this->client->click($link);
+        $this->assertTrue($this->client->getResponse()->isRedirect());
+        $this->client->followRedirect();
+        $this->assertNotContains($artist->getName(), $this->client->getResponse()->getContent());
+
+    }
 
 
 }

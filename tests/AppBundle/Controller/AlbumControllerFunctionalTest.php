@@ -65,8 +65,7 @@ class AlbumControllerFunctionalTest extends DataFixturesTestCase
         $crawler = $this->client->request('GET',"/");
 
         $link = $crawler
-            ->filter('a:contains("Delete")')
-            ->eq(1)
+            ->filter("#delete-album-{$this->albums[0]->getId()}")
             ->link()
             ;
 

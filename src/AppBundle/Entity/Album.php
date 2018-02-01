@@ -55,6 +55,7 @@ class Album
         return $this->id;
     }
 
+
     /**
      * Get artist
      *

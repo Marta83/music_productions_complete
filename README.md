@@ -51,7 +51,19 @@ php bin/console server:run
 ```
 http://127.0.0.1:8000/
 ```
+In this page you can manage the productions of the company. This is the list of actions you can do and How
 
+- Add a new Album
+
+```
+http://127.0.0.1:8000/add-album
+```
+
+- Delete album : In the corresponding album line click the link "Delete" and album will be deleted.
+
+- Add a artist to existed album : In the corresponding album line click the link "Add artist" and you will redirect to a form to insert artist information.
+
+- Delete artist: Each album has it's own artist list. Each artist has a delete link. If delete link is clicked the association between album and artist is going to be remove and if the artist doesn't have mor associations the artist also will be remove.
 
 
 ## Running the tests

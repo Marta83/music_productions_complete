@@ -19,11 +19,13 @@ class ArtistFixtures extends AbstractFixture
     private function addArtistPerAlbum(ObjectManager $manager): void
     {
         for ($i = 0; $i < 5; $i++) {
+            $album =$this->getReference("album-$i");
+            $number = $i + rand(1,1000) + $album->getId();
 
             $artist = new Artist();
-            $artist->setName('Artist name ' . $i);
-            $artist->setSpeciality('Artist speciality ' .$i);
-            $artist->addAlbum($this->getReference("album-$i"));
+            $artist->setName('Artist name ' . $number);
+            $artist->setSpeciality('Artist speciality ' .$number);
+            $artist->addAlbum($album);
             $manager->persist($artist);
 
         }
