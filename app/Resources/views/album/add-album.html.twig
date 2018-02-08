@@ -12,7 +12,7 @@
           Add album
         </div>
         <div class="card-body">
-            {{ form_start(form) }}
+          {{ form_start(form, { 'action': path('create_album')}) }}
               {{ form_widget(form) }}
 
               <input type="submit" class="btn btn-primary btn-block" value="Create" />

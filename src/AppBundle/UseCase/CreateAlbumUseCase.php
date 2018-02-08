@@ -39,17 +39,10 @@ class CreateAlbumUseCase
     public function execute(Request $request): Response
     {
         $form = $this->formFactory->create(AlbumType::class);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $album = $this->getAlbumFromFormData($form->getData());
-            $this->repository->save($album);
-            return $this->onSuccess();
-        }
 
         return $this->templating->renderResponse('album/add-album.html.twig', [
             'form' => $form->createView(),
             ]);
-
     }
 
     private function onSuccess(): Response

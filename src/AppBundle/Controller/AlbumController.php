@@ -3,19 +3,50 @@
 namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+use SimpleBus\SymfonyBridge\Bus\CommandBus;
+use AppBundle\Command\CreateAlbumCommand;
 use AppBundle\UseCase\CreateAlbumUseCase;
-use AppBundle\Form\ExistedArtistType;
 use AppBundle\Form\AlbumType;
 use AppBundle\Entity\Album;
 
 class AlbumController extends Controller
 {
     /**
-     * @Route("/add-album", name="add_album")
+     * @var MessageBus
+     */
+    private $messageBus;
+
+    public function __construct(CommandBus $messageBus)
+    {
+        $this->messageBus = $messageBus;
+
+    }
+
+    /**
+     * @Route("/create-album", name="create_album")
+     */
+    public function createAction(Request $request, CreateAlbumUseCase $createAlbumUseCase)
+    {
+
+        $form = $this->createForm(AlbumType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+        $data = $form->getData();
+         $title = $data['title'];
+         $published_at = $data['published_at'];
+
+         $command = new CreateAlbumCommand($title, $published_at);
+
+         $this->messageBus->handle($command);
+        }
+        return $this->redirectToRoute('album_list');
+
+    }
+
+    /**
+     * @Route("/new-album", name="new_album")
      */
     public function newAction(Request $request, CreateAlbumUseCase $createAlbumUseCase)
     {

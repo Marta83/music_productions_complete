@@ -14,7 +14,7 @@ class Album
 {
 
     public function __construct(string $title, \DateTime $published_at) {
-        $this->Contributions = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->contributions = new \Doctrine\Common\Collections\ArrayCollection();
 
         $this->title = $title;
         $this->published_at = $published_at;

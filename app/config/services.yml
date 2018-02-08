@@ -41,7 +41,8 @@ services:
     AppBundle\DataFixtures\:
         resource: '../../src/AppBundle/DataFixtures'
         tags: ['doctrine.fixture.orm']
-    # add more services, or override services that need manual wiring
-    # AppBundle\Service\ExampleService:
-    #     arguments:
-    #         $someArgument: 'some_value'
+
+    AppBundle\Command\Handler\CreateAlbumHandler:
+        public: true
+        tags:
+           - { name: command_handler, handles: create_album_command }
