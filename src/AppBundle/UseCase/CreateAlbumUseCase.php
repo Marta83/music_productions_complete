@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
-use Doctrine\ORM\EntityManagerInterface;
+use AppBundle\Repository\AlbumRepositoryInterface;
 use AppBundle\Form\AlbumType;
 
 class CreateAlbumUseCase
@@ -18,20 +18,20 @@ class CreateAlbumUseCase
     private $templating;
     private $router;
     private $formFactory;
-    private $em;
+    private $repository;
     private $session;
 
     public function __construct(
         EngineInterface $templating,
         RouterInterface $router,
         FormFactoryInterface $formFactory,
-        EntityManagerInterface $em
+        AlbumRepositoryInterface $repository
     )
     {
         $this->router = $router;
         $this->formFactory = $formFactory;
         $this->templating = $templating;
-        $this->em = $em;
+        $this->repository = $repository;
     }
 
 
@@ -40,8 +40,7 @@ class CreateAlbumUseCase
         $form = $this->formFactory->create(AlbumType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->em->persist($form->getData());
-            $this->em->flush();
+            $this->repository->save($form->getData());
             return $this->onSuccess();
         }
 
