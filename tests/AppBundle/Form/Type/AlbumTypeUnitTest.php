@@ -10,19 +10,20 @@ class AlbumTypeTest extends TypeTestCase
 {
     public function testSubmitValidData()
     {
+        $published = new \DateTime();
         $formData = array(
             'title' => 'Album title',
+            'published_at' => null,
         );
 
         $form = $this->factory->create(AlbumType::class);
 
-        $album = new Album();
-        $album->setTitle($formData['title']);
+        $album = new Album($formData['title'], new \DateTime());
 
         $form->submit($formData);
 
         $this->assertTrue($form->isSynchronized());
-        $this->assertEquals($album, $form->getData());
+        $this->assertEquals($formData, $form->getData());
 
         $view = $form->createView();
         $children = $view->children;

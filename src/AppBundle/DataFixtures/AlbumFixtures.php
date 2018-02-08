@@ -13,9 +13,7 @@ class AlbumFixtures extends AbstractFixture
     public function load(ObjectManager $manager)
     {
             for ($i = 0; $i < 5; $i++) {
-                $album = new Album();
-                $album->setTitle('Album title ' . $i);
-                $album->setPublishedAt(new \DateTime());
+                $album = new Album('Album title ' . $i, new \DateTime());
                 $manager->persist($album);
 
                 $this->addReference("album-$i", $album);

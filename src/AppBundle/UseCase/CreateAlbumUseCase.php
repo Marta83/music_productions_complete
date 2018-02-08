@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use AppBundle\Repository\AlbumRepositoryInterface;
+use AppBundle\Entity\Album;
 use AppBundle\Form\AlbumType;
 
 class CreateAlbumUseCase
@@ -40,7 +41,8 @@ class CreateAlbumUseCase
         $form = $this->formFactory->create(AlbumType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->repository->save($form->getData());
+            $album = $this->getAlbumFromFormData($form->getData());
+            $this->repository->save($album);
             return $this->onSuccess();
         }
 
@@ -55,5 +57,9 @@ class CreateAlbumUseCase
         return new RedirectResponse($this->router->generate('album_list'));
     }
 
+    private function getAlbumFromFormData(array $data)
+    {
+        return new Album($data['title'], $data['published_at'] );
+    }
 }
 

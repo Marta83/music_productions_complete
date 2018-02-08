@@ -13,8 +13,11 @@ use Doctrine\ORM\Mapping as ORM;
 class Album
 {
 
-    public function __construct() {
+    public function __construct(string $title, \DateTime $published_at) {
         $this->Contributions = new \Doctrine\Common\Collections\ArrayCollection();
+
+        $this->title = $title;
+        $this->published_at = $published_at;
     }
 
     /**
@@ -58,20 +61,6 @@ class Album
     }
 
     /**
-     * Set title
-     *
-     * @param string $title
-     *
-     * @return Album
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
      * Get Contributions
      *
      * @return contributions
@@ -99,20 +88,6 @@ class Album
     public function getTitle()
     {
         return $this->title;
-    }
-
-    /**
-     * Set publishedAt
-     *
-     * @param \DateTime $published_at
-     *
-     * @return Album
-     */
-    public function setPublishedAt($published_at)
-    {
-        $this->published_at = $published_at;
-
-        return $this;
     }
 
     /**
