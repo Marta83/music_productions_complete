@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use AppBundle\UseCase\CreateAlbumUseCase;
 use AppBundle\Form\ExistedArtistType;
 use AppBundle\Form\AlbumType;
 use AppBundle\Entity\Album;
@@ -16,24 +17,9 @@ class AlbumController extends Controller
     /**
      * @Route("/add-album", name="add_album")
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, CreateAlbumUseCase $createAlbumUseCase)
     {
-
-        $album = new Album();
-        $form = $this->createForm(AlbumType::class, $album);
-
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($album);
-            $em->flush();
-
-            return $this->redirectToRoute('album_list');
-        }
-
-        return $this->render('album/add-album.html.twig', [
-            'form' => $form->createView(),
-            ]);
+        return $createAlbumUseCase->execute($request);
     }
 
     /**

@@ -29,6 +29,15 @@ services:
         public: true
         tags: ['controller.service_arguments']
 
+    AppBundle\UseCase\:
+        resource: '../../src/AppBundle/UseCase'
+        public: true
+        tags: ['controller.service_arguments']
+        arguments: ['@templating']
+
+    AppBundle\Repository\:
+        resource: '../../src/AppBundle/Repository'
+
     AppBundle\DataFixtures\:
         resource: '../../src/AppBundle/DataFixtures'
         tags: ['doctrine.fixture.orm']
